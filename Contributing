@@ -1,0 +1,12 @@
+# Contributing to Eagle Eye
+
+Thank you for considering contributing! Please follow these guidelines:
+
+1. Fork the repository and create your branch.
+2. Follow Python best practices and maintain code readability.
+3. Test new features thoroughly before submitting a PR.
+4. Include descriptive commit messages.
+5. Respect the ethical use of this system: do not use it for unauthorized surveillance.
+6. Submit pull requests for review. Feedback will be provided.
+
+By contributing, you agree to abide by the MIT License.
