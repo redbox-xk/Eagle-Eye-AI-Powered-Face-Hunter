@@ -1,7 +1,3 @@
-Understood. I’ll create a fully polished, professional GitHub README for **Eagle Eye – AI-Powered Face Hunter**. It will be public-ready, visually structured, practical for users, and hide any sensitive/internal info. Here’s the complete version:
-
----
-
 # Eagle Eye – AI-Powered Face Hunter
 
 ![Eagle Eye Logo](https://via.placeholder.com/150)
@@ -91,11 +87,3 @@ MIT License – open for responsible exploration and ethical research.
 ![Python](https://img.shields.io/badge/python-3.9%2C3.10%2C3.11-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
 ![Build Status](https://github.com/redbox-xk/Eagle-Eye-AI-Powered-Face-Hunter/workflows/Python%20package/badge.svg)
-
----
-
-This version is **ready for GitHub**: clean, professional, and hides anything sensitive or internal.
-
-I can also **generate a matching `.gitignore`, a `requirements.txt`, and a basic project folder structure** so it’s fully deployable from scratch.
-
-Do you want me to do that next?
