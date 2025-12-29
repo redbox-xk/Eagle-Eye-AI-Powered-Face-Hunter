@@ -1,6 +1,6 @@
 # Eagle Eye – AI-Powered Face Hunter
 
-![Eagle Eye Logo](https://via.placeholder.com/150)
+![Eagle Eye Logo]((https://img.sanishtech.com/u/e05544b29cd04c6cc22841889fa7d2bb.jpg))
 *"To see is to know; to know is to act. In the tapestry of faces, every glance is a story, every identity a point of light in the vast network of existence."*
 
 Eagle Eye is more than a tool—it is an intelligence framework bridging human curiosity and artificial cognition. Observing the world through digital lenses, it maps presence, patterns, and existence itself. Each face scanned is a thread in the narrative of space and time.
