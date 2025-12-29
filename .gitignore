@@ -1,14 +1,25 @@
+# Python
 __pycache__/
 *.pyc
 *.pyo
 *.pyd
-.env
-.env.*
-.venv/
+*.env
+env/
 venv/
+.venv/
 *.sqlite3
-*.db
+
+# Logs
 *.log
-search_results/
-alerts/
-camera_tests/
+*.out
+
+# IDEs
+.vscode/
+.idea/
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Sensitive configs (keep out of repo)
+config/secrets.yaml
