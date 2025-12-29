@@ -1,0 +1,5 @@
+cameras:
+  - name: Front Gate
+    stream_url: rtsp://example.com/stream1
+  - name: Lobby
+    stream_url: rtsp://example.com/stream2
