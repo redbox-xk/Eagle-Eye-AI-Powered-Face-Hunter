@@ -3,16 +3,30 @@ type Handler = (data: any) => void
 class AuraWebSocket {
   private ws: WebSocket | null = null
   private handlers: Map<string, Handler[]> = new Map()
-  private reconnectDelay = 2000
+  private reconnectDelay = 1500
+  private maxDelay = 30000
   private _connected = false
+  private _reconnectTimer: ReturnType<typeof setTimeout> | null = null
 
   connect() {
+    if (this._reconnectTimer) {
+      clearTimeout(this._reconnectTimer)
+      this._reconnectTimer = null
+    }
+
     const proto = location.protocol === 'https:' ? 'wss' : 'ws'
     const url = `${proto}://${location.host}/ws`
-    this.ws = new WebSocket(url)
+
+    try {
+      this.ws = new WebSocket(url)
+    } catch {
+      this._scheduleReconnect()
+      return
+    }
 
     this.ws.onopen = () => {
       this._connected = true
+      this.reconnectDelay = 1500   // reset backoff on success
       console.log('[AURA-WS] Connected')
       this.emit('connection', { status: 'connected' })
     }
@@ -22,13 +36,16 @@ class AuraWebSocket {
         const { type, data } = JSON.parse(e.data)
         this.emit(type, data)
         this.emit('*', { type, data })
-      } catch {}
+      } catch { /* ignore malformed frames */ }
     }
 
     this.ws.onclose = () => {
-      this._connected = false
-      this.emit('connection', { status: 'disconnected' })
-      setTimeout(() => this.connect(), this.reconnectDelay)
+      if (this._connected) {
+        this._connected = false
+        this.emit('connection', { status: 'disconnected' })
+        console.log('[AURA-WS] Disconnected — reconnecting in', this.reconnectDelay, 'ms')
+      }
+      this._scheduleReconnect()
     }
 
     this.ws.onerror = () => {
@@ -36,10 +53,19 @@ class AuraWebSocket {
     }
   }
 
+  private _scheduleReconnect() {
+    this._reconnectTimer = setTimeout(() => {
+      this.reconnectDelay = Math.min(this.reconnectDelay * 1.5, this.maxDelay)
+      this.connect()
+    }, this.reconnectDelay)
+  }
+
   send(type: string, data: any) {
     if (this.ws?.readyState === WebSocket.OPEN) {
       this.ws.send(JSON.stringify({ type, ...data }))
+      return true
     }
+    return false
   }
 
   on(event: string, handler: Handler) {
@@ -54,7 +80,9 @@ class AuraWebSocket {
   }
 
   private emit(event: string, data: any) {
-    ;(this.handlers.get(event) || []).forEach(h => h(data))
+    ;(this.handlers.get(event) || []).forEach(h => {
+      try { h(data) } catch { /* prevent one bad handler killing the bus */ }
+    })
   }
 
   get connected() { return this._connected }

@@ -4,73 +4,193 @@
 
 @layer base {
   * { box-sizing: border-box; }
+
   body {
     @apply bg-aura-bg text-aura-text font-sans antialiased;
-    background-image: 
-      radial-gradient(ellipse at 20% 50%, rgba(0, 212, 255, 0.03) 0%, transparent 50%),
-      radial-gradient(ellipse at 80% 20%, rgba(124, 58, 237, 0.03) 0%, transparent 50%);
+    background-image:
+      radial-gradient(ellipse at 15% 40%, rgba(0, 212, 255, 0.04) 0%, transparent 55%),
+      radial-gradient(ellipse at 85% 15%, rgba(124, 58, 237, 0.04) 0%, transparent 55%),
+      radial-gradient(ellipse at 50% 90%, rgba(16, 185, 129, 0.02) 0%, transparent 50%);
   }
-  ::-webkit-scrollbar { width: 4px; height: 4px; }
-  ::-webkit-scrollbar-track { @apply bg-aura-bg; }
+
+  ::-webkit-scrollbar { width: 3px; height: 3px; }
+  ::-webkit-scrollbar-track { @apply bg-transparent; }
   ::-webkit-scrollbar-thumb { @apply bg-aura-border rounded-full; }
+  ::-webkit-scrollbar-thumb:hover { @apply bg-aura-accent/40; }
+
+  ::selection { background: rgba(0,212,255,0.2); color: #e2e8f0; }
 }
 
 @layer components {
+  /* Cards */
   .card {
-    @apply bg-aura-surface border border-aura-border rounded-xl p-4;
+    @apply bg-aura-surface border border-aura-border rounded-xl p-4
+           transition-all duration-200;
   }
+  .card-hover {
+    @apply card hover:border-aura-accent/30 hover:-translate-y-px;
+  }
+  .card-glow {
+    @apply card border-aura-accent/20;
+    box-shadow: 0 0 0 1px rgba(0,212,255,0.06) inset,
+                0 4px 24px rgba(0,0,0,0.3);
+  }
+
+  /* Badges */
   .badge {
     @apply inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-mono font-medium;
   }
+
+  /* Buttons */
   .btn {
-    @apply inline-flex items-center gap-2 px-4 py-2 rounded-lg font-medium text-sm transition-all duration-200 cursor-pointer;
+    @apply inline-flex items-center gap-2 px-4 py-2 rounded-lg font-medium text-sm
+           transition-all duration-200 cursor-pointer select-none;
   }
   .btn-primary {
-    @apply btn bg-aura-accent/10 text-aura-accent border border-aura-accent/30 hover:bg-aura-accent/20 hover:border-aura-accent/60;
+    @apply btn bg-aura-accent/10 text-aura-accent border border-aura-accent/30
+           hover:bg-aura-accent/20 hover:border-aura-accent/60 hover:shadow-[0_0_12px_rgba(0,212,255,0.15)]
+           active:scale-95;
   }
   .btn-ghost {
-    @apply btn bg-transparent text-aura-muted border border-aura-border hover:text-aura-text hover:border-aura-accent/30;
+    @apply btn bg-transparent text-aura-muted border border-aura-border
+           hover:text-aura-text hover:border-aura-accent/30 active:scale-95;
   }
+  .btn-danger {
+    @apply btn bg-red-500/10 text-red-400 border border-red-500/20
+           hover:bg-red-500/20 hover:border-red-500/40 active:scale-95;
+  }
+
+  /* Metrics */
   .metric-value {
-    @apply text-2xl font-bold font-mono text-aura-text;
+    @apply text-2xl font-bold font-mono text-aura-text leading-none;
   }
   .metric-label {
-    @apply text-xs text-aura-muted uppercase tracking-widest font-mono;
+    @apply text-[10px] text-aura-muted uppercase tracking-widest font-mono mt-1;
   }
-  .glow-cyan { box-shadow: 0 0 20px rgba(0, 212, 255, 0.15); }
-  .glow-purple { box-shadow: 0 0 20px rgba(124, 58, 237, 0.15); }
-  .glow-green { box-shadow: 0 0 20px rgba(16, 185, 129, 0.15); }
 
-  .status-dot {
-    @apply w-2 h-2 rounded-full;
+  /* Glow effects */
+  .glow-cyan   { box-shadow: 0 0 24px rgba(0, 212, 255, 0.12), 0 0 0 1px rgba(0,212,255,0.06) inset; }
+  .glow-purple { box-shadow: 0 0 24px rgba(124, 58, 237, 0.12), 0 0 0 1px rgba(124,58,237,0.06) inset; }
+  .glow-green  { box-shadow: 0 0 24px rgba(16, 185, 129, 0.12), 0 0 0 1px rgba(16,185,129,0.06) inset; }
+  .glow-warn   { box-shadow: 0 0 24px rgba(245, 158, 11, 0.12), 0 0 0 1px rgba(245,158,11,0.06) inset; }
+
+  /* Status dots */
+  .status-dot         { @apply w-2 h-2 rounded-full flex-shrink-0; }
+  .status-dot-active  { @apply status-dot bg-aura-accent3; animation: pulse-glow-green 2s ease-in-out infinite; }
+  .status-dot-warn    { @apply status-dot bg-aura-warn animate-pulse; }
+  .status-dot-error   { @apply status-dot bg-aura-danger; }
+  .status-dot-idle    { @apply status-dot bg-aura-muted; }
+
+  /* Form elements */
+  .input {
+    @apply w-full bg-aura-bg border border-aura-border rounded-lg px-3 py-2
+           text-sm font-mono text-aura-text placeholder-aura-muted
+           focus:outline-none focus:border-aura-accent/50 focus:ring-1 focus:ring-aura-accent/20
+           transition-all duration-150;
   }
-  .status-dot-active {
-    @apply status-dot bg-aura-accent3 animate-pulse;
+  .input-sm {
+    @apply input py-1.5 text-xs;
   }
-  .status-dot-warn {
-    @apply status-dot bg-aura-warn animate-pulse;
-  }
-  .status-dot-error {
-    @apply status-dot bg-aura-danger;
-  }
-  .status-dot-idle {
-    @apply status-dot bg-aura-muted;
+
+  /* Section header */
+  .section-label {
+    @apply text-[10px] text-aura-muted font-mono uppercase tracking-widest;
   }
 }
 
+/* ── Global background grid ───────────────────────────────────────── */
 .grid-bg {
-  background-image: 
-    linear-gradient(rgba(26, 39, 68, 0.4) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(26, 39, 68, 0.4) 1px, transparent 1px);
-  background-size: 40px 40px;
+  background-image:
+    linear-gradient(rgba(26, 39, 68, 0.3) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(26, 39, 68, 0.3) 1px, transparent 1px);
+  background-size: 44px 44px;
 }
 
+/* ── Scan-line animation ───────────────────────────────────────────── */
 .scan-line {
-  background: linear-gradient(transparent, rgba(0, 212, 255, 0.05), transparent);
-  animation: scan-move 4s ease-in-out infinite;
+  background: linear-gradient(transparent, rgba(0, 212, 255, 0.04), transparent);
+  animation: scan-move 6s ease-in-out infinite;
+  pointer-events: none;
 }
 
-@keyframes scan-move {
-  0% { transform: translateY(-100%); }
-  100% { transform: translateY(100vh); }
+/* ── Neon accent bar (top of sidebar) ────────────────────────────── */
+.neon-bar {
+  background: linear-gradient(90deg, #00d4ff, #7c3aed, #10b981);
+  background-size: 200% 100%;
+  animation: neon-shift 4s linear infinite;
 }
+
+/* ── Shimmer skeleton ─────────────────────────────────────────────── */
+.skeleton {
+  @apply bg-aura-border rounded;
+  background: linear-gradient(90deg, #1a2744 25%, #233060 50%, #1a2744 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.6s linear infinite;
+}
+
+/* ── Progress bar fill ────────────────────────────────────────────── */
+.bar-fill {
+  @apply h-full rounded-full transition-all duration-700;
+}
+
+/* ── Keyframes ────────────────────────────────────────────────────── */
+@keyframes scan-move {
+  0%   { transform: translateY(-100%); opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 1; }
+  100% { transform: translateY(100vh); opacity: 0; }
+}
+
+@keyframes neon-shift {
+  0%   { background-position: 0% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slide-in-left {
+  from { opacity: 0; transform: translateX(-12px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-4px); }
+}
+
+@keyframes pulse-glow-green {
+  0%, 100% { box-shadow: 0 0 4px rgba(16,185,129,0.6); opacity: 1; }
+  50%       { box-shadow: 0 0 8px rgba(16,185,129,0.9); opacity: 0.7; }
+}
+
+@keyframes pulse-glow-cyan {
+  0%, 100% { box-shadow: 0 0 6px rgba(0,212,255,0.5); }
+  50%       { box-shadow: 0 0 14px rgba(0,212,255,0.9); }
+}
+
+@keyframes spin-slow {
+  to { transform: rotate(360deg); }
+}
+
+/* ── Utility animation classes ────────────────────────────────────── */
+.animate-fade-in      { animation: fade-in 0.3s ease-out both; }
+.animate-slide-left   { animation: slide-in-left 0.25s ease-out both; }
+.animate-float        { animation: float 3s ease-in-out infinite; }
+.animate-spin-slow    { animation: spin-slow 3s linear infinite; }
+.animate-pulse-cyan   { animation: pulse-glow-cyan 2s ease-in-out infinite; }
+
+/* ── Staggered children ───────────────────────────────────────────── */
+.stagger > *:nth-child(1) { animation-delay: 0ms; }
+.stagger > *:nth-child(2) { animation-delay: 60ms; }
+.stagger > *:nth-child(3) { animation-delay: 120ms; }
+.stagger > *:nth-child(4) { animation-delay: 180ms; }
+.stagger > *:nth-child(5) { animation-delay: 240ms; }
+.stagger > *:nth-child(6) { animation-delay: 300ms; }

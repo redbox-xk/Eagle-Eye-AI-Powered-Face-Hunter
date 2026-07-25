@@ -22,5 +22,15 @@ export default defineConfig({
   build: {
     outDir: 'dist',
     sourcemap: false,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          react:    ['react', 'react-dom', 'react-router-dom'],
+          recharts: ['recharts'],
+          lucide:   ['lucide-react'],
+        },
+      },
+    },
+    chunkSizeWarningLimit: 600,
   },
 })
