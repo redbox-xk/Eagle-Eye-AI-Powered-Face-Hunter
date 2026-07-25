@@ -86,27 +86,46 @@ class SystemMetric(Base):
 # ── Engine Setup ──────────────────────────────────────────────────────────────
 
 def _build_async_url(url: str) -> str:
+    """Convert postgres:// → postgresql+asyncpg://, strip unsupported params."""
     if not url:
         return ""
+    # Swap scheme
     if url.startswith("postgresql://"):
-        return url.replace("postgresql://", "postgresql+asyncpg://", 1)
-    if url.startswith("postgres://"):
-        return url.replace("postgres://", "postgresql+asyncpg://", 1)
+        url = url.replace("postgresql://", "postgresql+asyncpg://", 1)
+    elif url.startswith("postgres://"):
+        url = url.replace("postgres://", "postgresql+asyncpg://", 1)
+    # asyncpg handles SSL natively via connect_args; strip query params that
+    # the DBAPI layer doesn't understand (e.g. sslmode from Replit's URL).
+    if "?" in url:
+        base, qs = url.split("?", 1)
+        # Keep nothing — asyncpg uses connect_args for SSL
+        url = base
     return url
 
 
-_db_url = _build_async_url(os.environ.get("DATABASE_URL", ""))
+_raw_url = os.environ.get("DATABASE_URL", "")
+_db_url = _build_async_url(_raw_url)
+_ssl_required = "sslmode=require" in _raw_url or "sslmode=prefer" in _raw_url
 
 engine = None
 AsyncSessionLocal = None
 
 if _db_url:
+    _connect_args: dict = {}
+    if _ssl_required:
+        import ssl as _ssl
+        _ctx = _ssl.create_default_context()
+        _ctx.check_hostname = False
+        _ctx.verify_mode = _ssl.CERT_NONE
+        _connect_args["ssl"] = _ctx
+
     engine = create_async_engine(
         _db_url,
         echo=False,
         pool_size=10,
         max_overflow=20,
         pool_pre_ping=True,
+        connect_args=_connect_args,
     )
     AsyncSessionLocal = async_sessionmaker(engine, expire_on_commit=False, class_=AsyncSession)
 

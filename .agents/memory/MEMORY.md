@@ -1,0 +1,1 @@
+- [AURA-EAGLE stack](aura-eagle-stack.md) — FastAPI (port 8000) + Vite/React (port 5000), asyncpg needs sslmode stripped from DATABASE_URL

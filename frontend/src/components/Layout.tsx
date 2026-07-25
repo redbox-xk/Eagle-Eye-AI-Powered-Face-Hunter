@@ -16,11 +16,12 @@ const NAV = [
 ]
 
 export default function Layout() {
-  const [connected, setConnected] = useState(false)
+  const [connected, setConnected] = useState(ws.connected)
   const [aura, setAura] = useState<number | null>(null)
   const location = useLocation()
 
   useEffect(() => {
+    setConnected(ws.connected)
     const off1 = ws.on('connection', ({ status }) => setConnected(status === 'connected'))
     const off2 = ws.on('state_snapshot', (data) => {
       // extract aura from decisions approval rate as proxy
