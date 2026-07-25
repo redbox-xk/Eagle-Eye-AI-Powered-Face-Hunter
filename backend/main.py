@@ -1,12 +1,14 @@
 """AURA-EAGLE — FastAPI Application Entry Point"""
 import asyncio
 import json
+import os
 from contextlib import asynccontextmanager
+from pathlib import Path
+
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
-from fastapi.responses import FileResponse
-import os
+from fastapi.responses import FileResponse, JSONResponse
 import structlog
 
 from backend.core.config import settings
@@ -16,12 +18,17 @@ from backend.api.routes import agents, memory, reasoning, knowledge, metrics
 
 log = structlog.get_logger()
 
+# Resolve frontend dist relative to repo root
+_REPO = Path(__file__).parent.parent
+_DIST = _REPO / "frontend" / "dist"
+_DIST_ASSETS = _DIST / "assets"
+
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     log.info("aura_eagle.startup", version=settings.app_version)
     await init_db()
-    # Warm up: run a silent boot task through the pipeline
+    # Boot task: warm up the cognitive baseline
     from backend.reasoning.pipeline import pipeline
     asyncio.create_task(
         pipeline.run("system boot — initialize cognitive baseline", {"silent": True})
@@ -35,6 +42,8 @@ app = FastAPI(
     description="Autonomous Unified Reasoning Architecture — Enhanced Adaptive Graph Learning Engine",
     version=settings.app_version,
     lifespan=lifespan,
+    docs_url="/api/docs",
+    redoc_url="/api/redoc",
 )
 
 app.add_middleware(
@@ -46,18 +55,23 @@ app.add_middleware(
 )
 
 # ── API Routers ────────────────────────────────────────────────────────────────
-app.include_router(agents.router, prefix="/api")
-app.include_router(memory.router, prefix="/api")
+app.include_router(agents.router,    prefix="/api")
+app.include_router(memory.router,    prefix="/api")
 app.include_router(reasoning.router, prefix="/api")
 app.include_router(knowledge.router, prefix="/api")
-app.include_router(metrics.router, prefix="/api")
+app.include_router(metrics.router,   prefix="/api")
+
+
+# ── Health ─────────────────────────────────────────────────────────────────────
+@app.get("/api/health")
+async def health():
+    return {"status": "operational", "system": "AURA-EAGLE", "version": settings.app_version}
 
 
 # ── WebSocket ──────────────────────────────────────────────────────────────────
 @app.websocket("/ws")
 async def websocket_endpoint(websocket: WebSocket):
     await manager.connect(websocket)
-    # Send initial state
     from backend.metrics_push import push_state
     await push_state(websocket)
     try:
@@ -78,17 +92,21 @@ async def websocket_endpoint(websocket: WebSocket):
         manager.disconnect(websocket)
 
 
-# ── Health ─────────────────────────────────────────────────────────────────────
-@app.get("/api/health")
-async def health():
-    return {"status": "operational", "system": "AURA-EAGLE", "version": settings.app_version}
-
-
 # ── Static / SPA ───────────────────────────────────────────────────────────────
-_dist = os.path.join(os.path.dirname(__file__), "..", "frontend", "dist")
-if os.path.isdir(_dist):
-    app.mount("/assets", StaticFiles(directory=os.path.join(_dist, "assets")), name="assets")
+if _DIST_ASSETS.is_dir():
+    app.mount("/assets", StaticFiles(directory=str(_DIST_ASSETS)), name="assets")
+    log.info("static.serving", path=str(_DIST))
+else:
+    log.warning("static.not_found", path=str(_DIST), hint="Run: cd frontend && npm run build")
 
-    @app.get("/{full_path:path}")
-    async def spa(full_path: str):
-        return FileResponse(os.path.join(_dist, "index.html"))
+
+@app.get("/{full_path:path}", include_in_schema=False)
+async def spa_fallback(full_path: str):
+    # Serve index.html for any non-API route (SPA client-side routing)
+    index = _DIST / "index.html"
+    if index.is_file():
+        return FileResponse(str(index))
+    return JSONResponse(
+        {"error": "Frontend not built. Run: cd frontend && npm run build"},
+        status_code=503,
+    )

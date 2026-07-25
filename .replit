@@ -16,23 +16,7 @@ author = "agent"
 
 [[workflows.workflow.tasks]]
 task = "workflow.run"
-args = "Backend API"
-
-[[workflows.workflow.tasks]]
-task = "workflow.run"
 args = "Start application"
-
-[[workflows.workflow]]
-name = "Backend API"
-author = "agent"
-
-[[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "cd /home/runner/workspace && python -m uvicorn backend.main:app --host 0.0.0.0 --port 8000 --reload"
-waitForPort = 8000
-
-[workflows.workflow.metadata]
-outputType = "console"
 
 [[workflows.workflow]]
 name = "Start application"
@@ -40,7 +24,7 @@ author = "agent"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "cd /home/runner/workspace/frontend && npm run dev -- --port 5000 --host"
+args = "cd /home/runner/workspace && bash start.sh"
 waitForPort = 5000
 
 [workflows.workflow.metadata]
