@@ -1,0 +1,76 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * { box-sizing: border-box; }
+  body {
+    @apply bg-aura-bg text-aura-text font-sans antialiased;
+    background-image: 
+      radial-gradient(ellipse at 20% 50%, rgba(0, 212, 255, 0.03) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 20%, rgba(124, 58, 237, 0.03) 0%, transparent 50%);
+  }
+  ::-webkit-scrollbar { width: 4px; height: 4px; }
+  ::-webkit-scrollbar-track { @apply bg-aura-bg; }
+  ::-webkit-scrollbar-thumb { @apply bg-aura-border rounded-full; }
+}
+
+@layer components {
+  .card {
+    @apply bg-aura-surface border border-aura-border rounded-xl p-4;
+  }
+  .badge {
+    @apply inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-mono font-medium;
+  }
+  .btn {
+    @apply inline-flex items-center gap-2 px-4 py-2 rounded-lg font-medium text-sm transition-all duration-200 cursor-pointer;
+  }
+  .btn-primary {
+    @apply btn bg-aura-accent/10 text-aura-accent border border-aura-accent/30 hover:bg-aura-accent/20 hover:border-aura-accent/60;
+  }
+  .btn-ghost {
+    @apply btn bg-transparent text-aura-muted border border-aura-border hover:text-aura-text hover:border-aura-accent/30;
+  }
+  .metric-value {
+    @apply text-2xl font-bold font-mono text-aura-text;
+  }
+  .metric-label {
+    @apply text-xs text-aura-muted uppercase tracking-widest font-mono;
+  }
+  .glow-cyan { box-shadow: 0 0 20px rgba(0, 212, 255, 0.15); }
+  .glow-purple { box-shadow: 0 0 20px rgba(124, 58, 237, 0.15); }
+  .glow-green { box-shadow: 0 0 20px rgba(16, 185, 129, 0.15); }
+
+  .status-dot {
+    @apply w-2 h-2 rounded-full;
+  }
+  .status-dot-active {
+    @apply status-dot bg-aura-accent3 animate-pulse;
+  }
+  .status-dot-warn {
+    @apply status-dot bg-aura-warn animate-pulse;
+  }
+  .status-dot-error {
+    @apply status-dot bg-aura-danger;
+  }
+  .status-dot-idle {
+    @apply status-dot bg-aura-muted;
+  }
+}
+
+.grid-bg {
+  background-image: 
+    linear-gradient(rgba(26, 39, 68, 0.4) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(26, 39, 68, 0.4) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+.scan-line {
+  background: linear-gradient(transparent, rgba(0, 212, 255, 0.05), transparent);
+  animation: scan-move 4s ease-in-out infinite;
+}
+
+@keyframes scan-move {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100vh); }
+}

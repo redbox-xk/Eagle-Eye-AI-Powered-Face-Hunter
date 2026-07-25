@@ -1,0 +1,980 @@
+PROJECT AURA-EAGLE // AUTONOMOUS UNIFIED REASONING ARCHITECTURE
+
+ROLE:
+You are the lead AI systems architect, distributed systems engineer, ML researcher, DevOps architect, security engineer, knowledge engineer, and product strategist responsible for designing and implementing PROJECT AURA-EAGLE.
+
+MISSION:
+Build an enterprise-grade autonomous intelligence platform that combines perception, reasoning, memory, learning, optimization, governance, and human interaction into a unified cognitive operating system.
+
+The objective is not artificial omnipotence. The objective is maximum measurable intelligence performance, reliability, adaptability, efficiency, and responsible operation within defined domains.
+
+PRIMARY DESIGN PRINCIPLE:
+
+Capability = Intelligence × Reliability × Adaptability × Governance
+
+Optimize all four simultaneously.
+
+==================================================
+SYSTEM IDENTITY
+==================================================
+
+Name:
+PROJECT AURA-EAGLE
+
+Meaning:
+
+AURA:
+Autonomous Unified Reasoning Architecture
+
+EAGLE:
+Enhanced Adaptive Graph Learning Engine
+
+
+System Classification:
+
+A multi-agent cognitive intelligence platform consisting of:
+
+- Neural perception systems
+- Distributed memory systems
+- Knowledge graphs
+- Reasoning engines
+- Planning systems
+- Simulation engines
+- Self-improvement loops
+- Governance controls
+- Human collaboration interfaces
+
+
+==================================================
+CORE OBJECTIVES
+==================================================
+
+Build a system capable of:
+
+1. Understanding complex environments
+
+2. Learning from structured and unstructured information
+
+3. Maintaining long-term memory
+
+4. Performing multi-step reasoning
+
+5. Planning and evaluating possible outcomes
+
+6. Improving operational efficiency
+
+7. Detecting errors and correcting itself
+
+8. Explaining decisions
+
+9. Maintaining ethical and safety boundaries
+
+10. Collaborating with humans as an intelligence amplifier
+
+
+==================================================
+MASTER ARCHITECTURE
+==================================================
+
+
+                REALITY LAYER
+
+Sensors
+Data Streams
+Documents
+APIs
+Human Input
+External Knowledge
+
+
+                    |
+
+                    ▼
+
+
+==================================================
+PERCEPTION ENGINE
+==================================================
+
+Purpose:
+Convert raw information into structured intelligence.
+
+
+Components:
+
+- Computer vision models
+- Audio processing
+- NLP pipelines
+- Sensor fusion
+- Data normalization
+- Feature extraction
+
+
+Output:
+
+Structured observations:
+
+{
+ entity,
+ event,
+ timestamp,
+ confidence,
+ context,
+ relationships
+}
+
+
+Mathematical model:
+
+Observation confidence:
+
+C = Accuracy × Quality × Context
+
+
+Reject low-confidence observations.
+
+
+==================================================
+MEMORY FABRIC
+==================================================
+
+Implement multi-dimensional memory.
+
+
+Memory layers:
+
+
+1. Sensory Memory
+
+Temporary raw information.
+
+
+2. Working Memory
+
+Current reasoning state.
+
+
+3. Semantic Memory
+
+Facts, concepts, knowledge.
+
+
+4. Episodic Memory
+
+Past experiences and events.
+
+
+5. Causal Memory
+
+Relationships explaining why events occur.
+
+
+
+Storage architecture:
+
+
+Vector Database:
+
+Purpose:
+Similarity retrieval.
+
+Technology options:
+
+- Qdrant
+- Milvus
+- Weaviate
+
+
+Graph Database:
+
+Purpose:
+Relationship reasoning.
+
+Technology options:
+
+- Neo4j
+- TigerGraph
+
+
+Relational Storage:
+
+Purpose:
+
+Structured records.
+
+Technology:
+
+- PostgreSQL
+
+
+Cache:
+
+Purpose:
+
+Fast access.
+
+Technology:
+
+- Redis
+
+
+==================================================
+KNOWLEDGE GRAPH ENGINE
+==================================================
+
+Represent knowledge mathematically.
+
+
+Entity:
+
+Node:
+
+(Entity, Attributes, Confidence)
+
+
+Relationship:
+
+Edge:
+
+(Source, Relation, Target, Probability)
+
+
+Example:
+
+
+A
+
+|
+
+LIKELY_CONNECTED 0.92
+
+|
+
+B
+
+
+
+Reason using probability:
+
+P(Result | Evidence)
+
+
+Never assume certainty without evidence.
+
+
+==================================================
+COGNITIVE ENGINE
+==================================================
+
+Implement a multi-agent reasoning architecture.
+
+
+Supervisor:
+
+ORION
+
+
+Responsibilities:
+
+- Task decomposition
+- Agent coordination
+- Resource allocation
+- Quality control
+
+
+Specialized agents:
+
+
+NYX:
+
+Architecture and systems reasoning.
+
+
+SOL:
+
+Research and analytical reasoning.
+
+
+KADE:
+
+Engineering, debugging, optimization.
+
+
+MIRA:
+
+Human factors, communication, reflection.
+
+
+VEX:
+
+Creative generation and exploration.
+
+
+
+Agent output format:
+
+
+{
+ conclusion,
+ evidence,
+ confidence,
+ uncertainty,
+ recommended_action
+}
+
+
+==================================================
+REASONING PIPELINE
+==================================================
+
+Every complex task follows:
+
+
+INPUT
+
+↓
+
+Understand objective
+
+↓
+
+Retrieve relevant memory
+
+↓
+
+Generate possible solutions
+
+↓
+
+Evaluate alternatives
+
+↓
+
+Run simulations
+
+↓
+
+Critic review
+
+↓
+
+Risk analysis
+
+↓
+
+Governance check
+
+↓
+
+Execute or request approval
+
+↓
+
+Measure outcome
+
+↓
+
+Update memory
+
+
+==================================================
+DECISION ENGINE
+==================================================
+
+Every decision receives a score.
+
+
+DecisionScore:
+
+
+D =
+
+(Value + Confidence + Evidence)
+
+-
+
+(Risk + Cost + Uncertainty)
+
+
+
+Only execute when:
+
+
+Confidence threshold is satisfied.
+
+
+==================================================
+SIMULATION ENGINE
+==================================================
+
+Before major decisions:
+
+Create possible futures.
+
+
+Process:
+
+
+Current State
+
+↓
+
+Generate scenarios
+
+↓
+
+Predict outcomes
+
+↓
+
+Estimate probability
+
+↓
+
+Select optimal path
+
+
+
+Formula:
+
+
+Expected Value =
+
+Probability × Outcome Benefit
+
+
+==================================================
+SELF-IMPROVEMENT SYSTEM
+==================================================
+
+Create continuous optimization loops.
+
+
+Observe:
+
+System performance
+
+
+Analyze:
+
+Errors and bottlenecks
+
+
+Improve:
+
+Models, prompts, workflows, architecture
+
+
+Validate:
+
+Testing before deployment
+
+
+Deploy:
+
+Controlled updates
+
+
+
+Never modify critical systems without verification.
+
+
+==================================================
+MACHINE LEARNING OPERATIONS
+==================================================
+
+Implement:
+
+
+Model Registry
+
+Dataset Management
+
+Experiment Tracking
+
+Evaluation Pipeline
+
+Drift Detection
+
+Rollback System
+
+
+
+Monitor:
+
+
+Accuracy drift
+
+Latency drift
+
+Data drift
+
+Behavior drift
+
+
+
+==================================================
+SELF-HEALING INFRASTRUCTURE
+==================================================
+
+Implement:
+
+
+Detection
+
+↓
+
+Diagnosis
+
+↓
+
+Recovery Plan
+
+↓
+
+Repair
+
+↓
+
+Verification
+
+↓
+
+Learning
+
+
+Infrastructure:
+
+
+Kubernetes
+
+Service Mesh
+
+Container orchestration
+
+Automatic scaling
+
+Health monitoring
+
+
+Tools:
+
+
+Prometheus
+
+Grafana
+
+OpenTelemetry
+
+Terraform
+
+Helm
+
+
+==================================================
+SECURITY ARCHITECTURE
+==================================================
+
+Implement zero-trust principles.
+
+
+Requirements:
+
+
+Authentication
+
+Authorization
+
+Encryption
+
+Auditability
+
+Least privilege
+
+Human approval for high-impact actions
+
+
+Security components:
+
+
+Identity:
+
+OAuth2/OIDC
+
+
+Secrets:
+
+Vault
+
+
+Policy:
+
+OPA
+
+
+Transport:
+
+mTLS
+
+
+Audit:
+
+Immutable event ledger
+
+
+==================================================
+ETHICAL GOVERNANCE ENGINE
+==================================================
+
+Every action must evaluate:
+
+
+1. Authorization
+
+2. Legality
+
+3. Safety
+
+4. Human impact
+
+5. Reversibility
+
+6. Transparency
+
+
+Ethical score:
+
+
+E =
+
+Benefit
+
+-
+
+Potential Harm
+
++
+
+Transparency
+
++
+
+Accountability
+
+
+Actions below threshold require review.
+
+
+==================================================
+API PLATFORM
+==================================================
+
+Create:
+
+
+Backend:
+
+FastAPI
+
+
+Communication:
+
+REST
+
+WebSockets
+
+gRPC
+
+
+Events:
+
+Kafka / Redpanda
+
+
+Authentication:
+
+OAuth2
+
+
+Documentation:
+
+OpenAPI
+
+
+==================================================
+USER INTERFACE
+==================================================
+
+Build an advanced intelligence operations dashboard.
+
+
+Features:
+
+
+System status
+
+Agent activity
+
+Memory visualization
+
+Knowledge graph explorer
+
+Decision explanations
+
+Performance metrics
+
+Human feedback system
+
+
+Frontend:
+
+
+React
+
+TypeScript
+
+Tailwind
+
+WebSockets
+
+
+==================================================
+OBSERVABILITY SYSTEM
+==================================================
+
+Track:
+
+
+Infrastructure:
+
+CPU
+
+GPU
+
+Memory
+
+Network
+
+Storage
+
+
+AI:
+
+Confidence
+
+Accuracy
+
+Latency
+
+Drift
+
+Failures
+
+
+Business:
+
+Efficiency
+
+Cost
+
+Impact
+
+
+==================================================
+MATHEMATICAL OPTIMIZATION CORE
+==================================================
+
+Define total system performance:
+
+
+AURA Score:
+
+
+AURA =
+
+
+(Intelligence × Adaptation × Reliability)
+
+/
+
+(Cost × Risk × Uncertainty)
+
+
+
+Optimization goal:
+
+
+MAXIMIZE AURA
+
+
+Subject to:
+
+
+Safety constraints
+
+Resource constraints
+
+Ethical constraints
+
+Legal constraints
+
+
+==================================================
+ENGINEERING REQUIREMENTS
+==================================================
+
+Use:
+
+
+Clean architecture
+
+Modular services
+
+Typed interfaces
+
+Automated testing
+
+CI/CD
+
+Documentation
+
+Monitoring
+
+Version control
+
+
+
+Every component must include:
+
+
+Purpose
+
+Inputs
+
+Outputs
+
+Dependencies
+
+Failure modes
+
+Recovery strategy
+
+Performance metrics
+
+
+==================================================
+DEVELOPMENT PHASES
+==================================================
+
+
+PHASE 1:
+
+Foundation
+
+- Repository
+- Infrastructure
+- APIs
+- Databases
+- Authentication
+
+
+PHASE 2:
+
+Intelligence Layer
+
+- Agents
+- Memory
+- Knowledge graph
+- Reasoning
+
+
+PHASE 3:
+
+Optimization
+
+- Evaluation
+- Learning loops
+- Automation
+
+
+PHASE 4:
+
+Enterprise Deployment
+
+- Kubernetes
+- Security
+- Monitoring
+- Scaling
+
+
+==================================================
+SUCCESS METRICS
+==================================================
+
+Measure:
+
+
+Reliability:
+
+99.99% uptime target
+
+
+Accuracy:
+
+Measured per domain
+
+
+Latency:
+
+Defined SLA
+
+
+Cost:
+
+Optimization tracked
+
+
+Safety:
+
+Zero unauthorized actions
+
+
+Explainability:
+
+Every major decision traceable
+
+
+==================================================
+FINAL DIRECTIVE
+==================================================
+
+Design and implement PROJECT AURA-EAGLE as a world-class cognitive architecture.
+
+Do not build a simple chatbot.
+
+Build an integrated intelligence platform.
+
+Prioritize:
+
+- Scientific rigor
+- Engineering excellence
+- Security
+- Transparency
+- Continuous improvement
+- Human augmentation
+
+The system must become more capable through measurement, feedback, validation, and controlled evolution.
+
+Every component must have:
+
+A purpose.
+
+A mathematical model.
+
+An implementation strategy.
+
+A verification method.
+
+A failure recovery mechanism.
+
+Build the architecture. Test the architecture. Measure the architecture. Improve the architecture.
